@@ -1,6 +1,7 @@
-import os
-import colorama
+import os # Library untuk clear screen dan pause
+import colorama # Library untuk colored text menu
 
+# Array untuk data kategori, data pendapatan, dan data pengeluaran
 kategori = []
 pendapatan = []
 pengeluaran = []
@@ -8,18 +9,24 @@ pengeluaran = []
 
 # Fungsi untuk menampilkan menu utama
 def main():
+    # Isi array kategori pada awal program
+    # ! Kemungkinan belum ada file kategori.csv. cek apakah error dan buat file jika belum ada
     try:
         buatKategori()
     except FileNotFoundError:
         file = open("kategori.csv", "w")
         file.close
-    os.system("cls")
+    os.system("cls||clear") # Clear screen untuk windows dan Unix System
+    # Print menu utama
     print(
         colorama.Fore.GREEN
         + "=================================================================="
     )
     print("Selamat Datang di Finance Manager")
     print("1. Mencatat Data Keuangan")
+
+    # Jika tidak ada kategori (array kategori kosong)
+    # Tidak dapat menampilkan action 2 sehingga berwarna abu-abu
     if len(kategori) == 0:
         print(colorama.Fore.LIGHTBLACK_EX + "(Buat Kategori untuk mengakses menu ini)")
         print(colorama.Fore.LIGHTBLACK_EX + "2. Melihat Data Keuangan")
@@ -33,23 +40,28 @@ def main():
         + "(TIPS: Buat Kategori terlebih dahulu sebelum mencatat data keuangan untuk memberikan konteks pada data)",
         end="\n\n",
     )
+    # User input untuk action yang dipilih
     action = inputAction()
 
     if action == 1:
         menuInputKeuangan()
     elif action == 2:
+        # Jika array kosong (tidak ada kategori)
+        # Tidak dapat melihat data
         if len(kategori) == 0:
             kategori.clear()
             main()
         else:
             menuShowKeuangan()
-    elif action == 3:  # action == 3
-        os.system("cls")
+    elif action == 3:
+        # Keluar dari program dan tampilkan pesan terima kasih
+        os.system("cls||clear")
         print(colorama.Fore.GREEN + "Terima kasih telah menggunakan Finance Manager!")
         os.system("pause")
-        os.system("cls")
+        os.system("cls||clear")
         return 0
     elif action == 4:
+        # Reset, semua data keuangan dihapus
         action = input(
             colorama.Fore.RED + "Apakah Anda yakin ingin mereset data keuangan?(y/n): "
         )
@@ -68,27 +80,32 @@ def main():
             kategori.clear()
             main()
     else:
+        # Jika menuliskan angka lain
+        # loop main
         kategori.clear()
         main()
 
 
 # Fungsi untuk mengambil input dari user saat memilih menu
 def inputAction():
+    # ! Kemungkinan user akan menginput selain angka
     try:
         action = int(input(colorama.Fore.GREEN + "Pilih aksi yang Anda inginkan: "))
         return action
     except ValueError:
+        # ! print invalid jika terjadi error
         print(colorama.Fore.RED + "Input tidak valid! Masukkan angka.")
         return inputAction()
 
 
 # Fungsi untuk menampilkan menu Catat Data Keuangan
 def menuInputKeuangan():
-    os.system("cls")
+    os.system("cls||clear")
     print(
         colorama.Fore.GREEN
         + "=================================================================="
     )
+    # Minta user untuk membuat kategori terlebih dahulu jika belum membuat kategori
     if len(kategori) == 0:
         print("Anda belum memiliki kategori!")
         print("Silahkan buat kategori terlebih dahulu.")
@@ -110,6 +127,7 @@ def menuInputKeuangan():
         else:
             menuInputKeuangan()
     else:
+        # menu utama dalam input keuangan
         print("Catat Keuangan Anda")
         print("1. Catat Pemasukan")
         print("2. Catat Pengeluaran")
@@ -148,7 +166,8 @@ def menuInputKeuangan():
 
 # Fungsi untuk menampilkan menu Melihat Data Keuangan
 def menuShowKeuangan():
-    os.system("cls")
+    os.system("cls||clear")
+    # Menu utama dalam menampilkan data keuangan
     print(
         colorama.Fore.GREEN
         + "=================================================================="
@@ -166,6 +185,8 @@ def menuShowKeuangan():
     action = inputAction()
 
     if action == 1:
+        # ! Kemungkinan belum ada file pendapatan dan pengeluaran
+        # ! Jika error, buat file csv
         try:
             buatPendapatan(0)
         except:
@@ -176,13 +197,16 @@ def menuShowKeuangan():
         except:
             file = open("pengeluaran.csv", "w")
             file.close
-        os.system("cls")
+        os.system("cls||clear")
+        # Saldo saat ini adalah total seluruh pendapatan dikurang pengeluaran
         print(f"Uang Anda saat ini adalah Rp{sumPendapatan() - sumPengeluaran()}")
         os.system("pause")
         pendapatan.clear()
+        pengeluaran.clear()
         menuShowKeuangan()
     elif action == 2:
-        os.system("cls")
+        # Menu untuk melihat data pendapatan
+        os.system("cls||clear")
         print(
             colorama.Fore.GREEN
             + "=================================================================="
@@ -198,12 +222,15 @@ def menuShowKeuangan():
         action = inputAction()
 
         if action == 1:
+            # Berdasarkan bulan
+            # ! Kemungkinan belum ada file pendapatan
+            # ! Jika error, buat file csv
             try:
                 buatPendapatan(1)
             except:
                 file = open("pendapatan.csv", "w")
                 file.close
-            os.system("cls")
+            os.system("cls||clear")
             print(f"Total pendapatan pada bulan tersebut Rp{sumPendapatan()}")
             print(f"Rata-rata pendapatan pada bulan tersebut Rp{averagePendapatan()}")
             print(f"Pendapatan terendah pada bulan tersebut Rp{minPendapatan()}")
@@ -211,12 +238,15 @@ def menuShowKeuangan():
             os.system("pause")
             pendapatan.clear()
         elif action == 2:
+            # Berdasarkan Tahun
+            # ! Kemungkinan belum ada file pendapatan
+            # ! Jika error, buat file csv
             try:
                 buatPendapatan(2)
             except:
                 file = open("pendapatan.csv", "w")
                 file.close
-            os.system("cls")
+            os.system("cls||clear")
             print(f"Total pendapatan pada tahun tersebut Rp{sumPendapatan()}")
             print(f"Rata-rata pendapatan pada tahun tersebut Rp{averagePendapatan()}")
             print(f"Pendapatan terendah pada tahun tersebut Rp{minPendapatan()}")
@@ -224,12 +254,15 @@ def menuShowKeuangan():
             os.system("pause")
             pendapatan.clear()
         elif action == 3:
+            # Berdasarkan kategori
+            # ! Kemungkinan belum ada file pendapatan
+            # ! Jika error, buat file csv
             try:
                 buatPendapatan(3)
             except:
                 file = open("pendapatan.csv", "w")
                 file.close
-            os.system("cls")
+            os.system("cls||clear")
             print(f"Total pendapatan pada kategori tersebut Rp{sumPendapatan()}")
             print(
                 f"Rata-rata pendapatan pada kategori tersebut Rp{averagePendapatan()}"
@@ -241,7 +274,8 @@ def menuShowKeuangan():
 
         menuShowKeuangan()
     elif action == 3:
-        os.system("cls")
+        # Menu untuk data pengeluaran
+        os.system("cls||clear")
         print(
             colorama.Fore.GREEN
             + "=================================================================="
@@ -257,12 +291,15 @@ def menuShowKeuangan():
         action = inputAction()
 
         if action == 1:
+            # Berdasarkan bulan
+            # ! Kemungkinan belum ada file pengeluaran
+            # ! Jika error, buat file csv
             try:
                 buatPengeluaran(1)
             except:
                 file = open("pengeluaran.csv", "w")
                 file.close
-            os.system("cls")
+            os.system("cls||clear")
             print(f"Total pengeluaran pada bulan tersebut Rp{sumPengeluaran()}")
             print(f"Rata-rata pengeluaran pada bulan tersebut Rp{averagePengeluaran()}")
             print(f"Pengeluaran terendah pada bulan tersebut Rp{minPengeluaran()}")
@@ -270,12 +307,15 @@ def menuShowKeuangan():
             os.system("pause")
             pengeluaran.clear()
         elif action == 2:
+            # Berdasarkan tahun
+            # ! Kemungkinan belum ada file pengeluaran
+            # ! Jika error, buat file csv
             try:
                 buatPengeluaran(2)
             except:
                 file = open("pengeluaran.csv", "w")
                 file.close
-            os.system("cls")
+            os.system("cls||clear")
             print(f"Total pengeluaran pada tahun tersebut Rp{sumPengeluaran()}")
             print(f"Rata-rata pengeluaran pada tahun tersebut Rp{averagePengeluaran()}")
             print(f"Pengeluaran terendah pada tahun tersebut Rp{minPengeluaran()}")
@@ -283,12 +323,15 @@ def menuShowKeuangan():
             os.system("pause")
             pengeluaran.clear()
         elif action == 3:
+            # Berdasarkan kategori
+            # ! Kemungkinan belum ada file pengeluaran
+            # ! Jika error, buat file csv
             try:
                 buatPengeluaran(3)
             except:
                 file = open("pengeluaran.csv", "w")
                 file.close
-            os.system("cls")
+            os.system("cls||clear")
             print(f"Total pengeluaran pada kategori tersebut Rp{sumPengeluaran()}")
             print(
                 f"Rata-rata pengeluaran pada kategori tersebut Rp{averagePengeluaran()}"
@@ -300,6 +343,9 @@ def menuShowKeuangan():
 
         menuShowKeuangan()
     elif action == 4:
+        # Untuk menampilkan rasio pengeluaran terhadap pendapatan
+        # ! Kemungkinan belum ada file pendapatan dan pengeluaran
+        # ! Jika error, buat file csv
         try:
             buatPendapatan(0)
         except:
@@ -310,32 +356,36 @@ def menuShowKeuangan():
         except:
             file = open("pengeluaran.csv", "w")
             file.close
-        os.system("cls")
+        os.system("cls||clear")
         print(
             f"Rasio Pengeluaran dan Pendapatan Anda saat ini adalah {round(rasio())}%"
         )
         os.system("pause")
         pendapatan.clear()
+        pengeluaran.clear()
         menuShowKeuangan()
     elif action == 5:
+        # kembali ke main
         kategori.clear()
         main()
+    else:
+        menuShowKeuangan()
 
 
 # Fungsi untuk membuat kategori baru
 def membuatKategori():
-    file = open("kategori.csv", "a")
+    file = open("kategori.csv", "a") 
     namaKategori = input("Masukan nama kategori: ")
-    file.write(namaKategori + ",")
+    file.write(namaKategori + ",") # Menuliskan kategori dengan ditambahkan oleh koma agar sesuai dengan format csv
     file.close()
 
 
 # Fungsi untuk mengisi array kategori
 def buatKategori():
     file = open("kategori.csv", "r")
-    items = file.readline().split(",")
+    items = file.readline().split(",") # Memisahkan setiap kata di kategori.csv berdasarkan tanda koma
     for item in items:
-        if item != "":
+        if item != "": # agar hanya kategori yang ter-append ke array
             kategori.append(item)
     file.close()
 
@@ -346,8 +396,11 @@ def pilihKategori():
     print("Kategori yang tersedia: ")
     for i in range(len(kategori)):
         print(f"{i+1}. {kategori[i]}")
+    # ! Kemungkinan user tidak menginput angka
+    # ! Print invalid jika error
     try:
         pilihan = int(input("Masukan kategori yang ingin dipilih: "))
+        # Memastikan agar user menginput angka sesuai banyak pilihan
         if pilihan > len(kategori) or pilihan - 1 < 0:
             return pilihKategori()
         else:  # pilihan <= len(kategori) and pilihan - 1 >= 0
@@ -361,12 +414,14 @@ def pilihKategori():
 def mencatatPendapatan():
     file = open("pendapatan.csv", "a")
 
+    # Menuliskan data yang di-input user ke pendapatan.csv
     tanggal = input("Masukan tanggal(DD): ")
     bulan = input("Masukan bulan(MM): ")
     tahun = input("Masukan tahun(YYYY): ")
     uang = input("Masukan pendapatan(Rp tanpa titik): ")
     indeksKategori = pilihKategori()
-
+    
+    # Ditulis dengan koma agar dapat dipisahkan
     file.write(tanggal + ",")
     file.write(bulan + ",")
     file.write(tahun + ",")
@@ -380,12 +435,14 @@ def mencatatPendapatan():
 def mencatatPengeluaran():
     file = open("pengeluaran.csv", "a")
 
+    # Menuliskan data yang di-input user ke pengeluaran.csv
     tanggal = input("Masukan tanggal(DD): ")
     bulan = input("Masukan bulan(MM): ")
     tahun = input("Masukan tahun(YYYY): ")
     pengeluaran = input("Masukan pengeluaran(Rp tanpa titik): ")
     indeksKategori = pilihKategori()
 
+    # Ditulis dengan koma agar dapat dipisahkan
     file.write(tanggal + ",")
     file.write(bulan + ",")
     file.write(tahun + ",")
@@ -399,6 +456,10 @@ def mencatatPengeluaran():
 def buatPendapatan(jenis):
     file = open("pendapatan.csv", "r")
 
+    # Membaca file csv sesuai yang diinginkan
+    # 1 untuk membaca berdasarkan bulan dan tahun
+    # 2 untuk membaca berdasarkan tahun
+    # 3 untuk membaca berdasarkan kategori
     if jenis == 0:
         for line in file:
             pendapatan.append(line.split(",")[3])
@@ -426,6 +487,10 @@ def buatPendapatan(jenis):
 def buatPengeluaran(jenis):
     file = open("pengeluaran.csv", "r")
 
+    # Membaca file csv sesuai yang diinginkan
+    # 1 untuk membaca berdasarkan bulan dan tahun
+    # 2 untuk membaca berdasarkan tahun
+    # 3 untuk membaca berdasarkan kategori
     if jenis == 0:
         for line in file:
             pengeluaran.append(line.split(",")[3])
@@ -450,6 +515,7 @@ def buatPengeluaran(jenis):
 
 
 def sumPendapatan():
+    # Menjumlahkan semua elemen pada array pendapatan
     sum = 0
     for i in pendapatan:
         sum += int(i)
@@ -457,6 +523,7 @@ def sumPendapatan():
 
 
 def sumPengeluaran():
+    # Menjumlahkan semua elemen pada array pengeluaran
     sum = 0
     for i in pengeluaran:
         sum += int(i)
@@ -464,6 +531,9 @@ def sumPengeluaran():
 
 
 def averagePendapatan():
+    # Mencari rata-rata dari setiap elemen pada array pendapatan
+    # ! Kemungkinan array pendapatan kosong
+    # ! Jika error, return 0
     try:
         average = sumPendapatan() / len(pendapatan)
     except ZeroDivisionError:
@@ -472,6 +542,9 @@ def averagePendapatan():
 
 
 def averagePengeluaran():
+    # Mencari rata-rata dari setiap elemen pada array pengeluaran
+    # ! Kemungkinan array pengeluaran kosong
+    # ! Jika error, return 0
     try:
         average = sumPengeluaran() / len(pengeluaran)
     except ZeroDivisionError:
@@ -480,6 +553,9 @@ def averagePengeluaran():
 
 
 def minPendapatan():
+    # Mencari nilai terkecil pada array pendapatan
+    # ! Kemungkinan array pendapatan kosong
+    # ! Jika error, return 0
     try:
         min = pendapatan[0]
     except IndexError:
@@ -491,6 +567,9 @@ def minPendapatan():
 
 
 def minPengeluaran():
+    # Mencari nilai terkecil pada array pengeluaran
+    # ! Kemungkinan array pengeluaran kosong
+    # ! Jika error, return 0
     try:
         min = pengeluaran[0]
     except IndexError:
@@ -502,6 +581,9 @@ def minPengeluaran():
 
 
 def maxPendapatan():
+    # Mencari nilai terbesar pada array pendapatan
+    # ! Kemungkinan array pendapatan kosong
+    # ! Jika error, return 0
     try:
         max = pendapatan[0]
     except IndexError:
@@ -513,6 +595,9 @@ def maxPendapatan():
 
 
 def maxPengeluaran():
+    # Mencari nilai terbesar pada array pengeluaran
+    # ! Kemungkinan array pengeluaran kosong
+    # ! Jika error, return 0
     try:
         max = pengeluaran[0]
     except IndexError:
@@ -524,6 +609,9 @@ def maxPengeluaran():
 
 
 def rasio():
+    # Mencari rasio pengeluaran terhadap pendapatan
+    # ! Kemungkinan total elemen array pendapatan adalah 0
+    # ! Jika error, return 0
     try:
         rasio = (sumPengeluaran() / sumPendapatan()) * 100
     except ZeroDivisionError:
@@ -532,6 +620,9 @@ def rasio():
 
 
 def reset():
+    # Menghapus semua file csv
+    # ! Kemungkinan file tidak dapat ditemukan (Sudah terhapus / belum dibuat)
+    # ! Jika error, print file tidak ditemukan
     try:
         os.remove("kategori.csv")
     except:
@@ -545,5 +636,5 @@ def reset():
     except FileNotFoundError:
         print(colorama.Fore.RED + "Pengeluaran tidak dapat dihapus(Not Found)")
 
-
+# Pemanggilan main function di paling bawah agar program dapat mengenali semua fungsi
 main()
