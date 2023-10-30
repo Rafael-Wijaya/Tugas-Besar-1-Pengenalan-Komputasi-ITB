@@ -71,22 +71,20 @@ Jika menemukan kesalahan dalam repositori ini, silahkan melakukan `issue` ataupu
 <h2 align="center">Alma Felicia Vielrizki</h2>
 <h4 align="center">Anggota Kelompok</h4>
 
-- 📫 How to reach me **placeholder**
+- 📫 How to reach me **almavielrizki@gmail.com**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://stackoverflow.com/users/22551978" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="22551978" height="30" width="40" /></a>
-<a href="https://instagram.com/kleiovv" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="kleiovv" height="30" width="40" /></a>
+<a href="https://instagram.com/almafeliciav" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="almafeliciav" height="30" width="40" /></a>
 </p>
 
-<h2 align="center">M Azizdzaki Khrisnanurmuflih</h2>
+<h2 align="center">Muhammad Azizdzaki Khrisnanurmuflih</h2>
 <h4 align="center">Anggota Kelompok</h4>
 
-- 📫 How to reach me **placeholder**
+- 📫 How to reach me **azizdzaki1234@gmail.com**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://stackoverflow.com/users/22551978" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="22551978" height="30" width="40" /></a>
-<a href="https://instagram.com/kleiovv" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="kleiovv" height="30" width="40" /></a>
+<a href="https://instagram.com/azizdzakikhk" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="azizdzakikhk" height="30" width="40" /></a>
 </p>
 
